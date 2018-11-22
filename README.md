@@ -23,7 +23,7 @@ $ sudo singularity instance.start --bind /tmp/apache2:/var/run/apache2 paraview-
 
 This should get apache2 running on localhost:
 
-![apache2.png](apache2.png)
+![apache.png](apache.png)
 
 Note that you *must* stop local web servers, including any Docker applications
 running on that port. I'm not privy to how paraview works, but given this setup
