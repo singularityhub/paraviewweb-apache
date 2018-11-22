@@ -37,7 +37,7 @@ $ sudo singularity shell instance://apache
 And to stop the container, you also need sudo
 
 ```bash
-$ sudo singularity stop instance://apache
+$ sudo singularity instance.stop instance://apache
 ```
 
 I'm not sure if this is reasonable to run in user space because of needing write
