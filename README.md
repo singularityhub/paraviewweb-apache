@@ -1,5 +1,10 @@
 # Paraview
 
+For instructions on using Paraview (the executable) directly from a Singularity container,
+see [this post](https://ask.cyberinfrastructure.org/t/how-do-i-run-paraview-or-openfoam-on-an-hpc-resource/644/2)
+on AskCyberinfrastructre. Continue reading below for using ParaviewWeb via a Docker container, or
+Singularity container instance.
+
 ## Docker
 It was hard to get it working with Singularity (this is common, it's read only!) so let's start
 with a Docker container. We can use the container provided from [this Dockerfile](https://github.com/Kitware/paraviewweb/blob/master/tools/docker/demo/Dockerfile). Run the container, and note we are binding a port for the web socket as well.
