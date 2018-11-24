@@ -4,7 +4,7 @@
 It was hard to get it working with Singularity (this is common, it's read only!) so let's start
 with a Docker container. We can use the container provided from [this Dockerfile](https://github.com/Kitware/paraviewweb/blob/master/tools/docker/demo/Dockerfile). Run the container, and note we are binding a port for the web socket as well.
 
-You can do the below on a Mac with Nvidia runtime:
+You can do the below on Linux with Nvidia runtime:
 
 ```bash
 docker run -p 0.0.0.0:9000:80 --runtime=nvidia -ti kitware/paraviewweb:pvw-egl-demo-v5.6.0 "ws://localhost:9000/"
@@ -29,6 +29,7 @@ Make a folder to bind to on the host, along with other files that need write:
 
 ```bash
 $ mkdir -p /tmp/apache2/run
+$ mkdir -p /tmp/data
 $ mkdir -p /tmp/apache2/logs
 $ mkdir -p /tmp/wslink/logs
 $ touch /tmp/wslink/proxy-mapping.txt
@@ -38,18 +39,21 @@ Start the container instance, here we are naming it "paraview." Since we need wr
 to /var/lock we must be sudo.
 
 ```bash
-$ sudo singularity instance.start --bind /tmp/apache2/run:/var/run/apache2 --bind /tmp/apache2/logs:/var/log/apache2 --bind /tmp/wslink/logs:/opt/wslink-launcher/logs --bind /tmp/wslink/proxy-mapping.txt:/opt/wslink-launcher/proxy-mapping.txt paraview-web.simg paraview
+$ sudo singularity instance.start --bind /tmp/apache2/run:/var/run/apache2 --bind /tmp/apache2/logs:/var/log/apache2 --bind /tmp/wslink/logs:/opt/wslink-launcher/logs --bind /tmp/wslink/proxy-mapping.txt:/opt/wslink-launcher/proxy-mapping.txt --bind /tmp/data:/data paraview-web.simg paraview
 ```
 
 You should now see the paraview interface running on [127.0.0.1](http://127.0.0.1)
 
 ![paraview.png](paraview.png)
 
-Note that you *must* stop local web servers, including any Docker applications
+The mapping to `/data` is where local web applications will load files from.
+
+Also note that you *must* stop local web servers, including any Docker applications
 running on that port. I'm not privy to how paraview works, but given this setup
 you should be able to figure it out from here. Here is how to shell into the
 container:
 
+Huge thanks to [@jourdain](https://github.com/jourdain) for his detailed help and instruction to figuring this out! :D
 
 ## Interactive shell
 I had needed to debug further to see how to get paraview working. Here is how to shell inside.
