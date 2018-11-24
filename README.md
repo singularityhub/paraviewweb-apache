@@ -10,7 +10,7 @@ You can do the below on Linux with Nvidia runtime:
 docker run -p 0.0.0.0:9000:80 --runtime=nvidia -ti kitware/paraviewweb:pvw-egl-demo-v5.6.0 "ws://localhost:9000/"
 ```
 
-ON a computer without (like mine)
+On a computer without (like mine)
 
 ```bash
 docker run -p 0.0.0.0:9000:80 -ti kitware/paraviewweb:pvw-osmesa-demo-v5.6.0 "ws://localhost:9000/" "-dr" "--mesa-swr"
